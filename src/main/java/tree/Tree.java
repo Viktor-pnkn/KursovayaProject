@@ -3,16 +3,18 @@ package tree;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Tree {
     public Node root;
     public Integer highLevel = 0;
+    public ArrayList<Integer> test = new ArrayList<Integer>();
 
-    public Tree(ArrayList<String> functions, Set<Integer> points) {
+    public Tree(ArrayList<String> functions, ArrayList<Integer> points) {
         this.root = new Node(functions, points, -1);
     }
 
-    private void addRecursive(Node current, ArrayList<String> value, Set<Integer> points, Integer level) {
+    private void addRecursive(Node current, ArrayList<String> value, ArrayList<Integer> points, Integer level) {
         current = new Node(value, points, level);
         if (value.size() > 1 && points.size() < 16) {
             int point = minDifference(value, points);
@@ -24,6 +26,7 @@ public class Tree {
         } else {
             if (current.level > this.highLevel) {
                 this.highLevel = current.level;
+                this.test = points;
             }
         }
     }
@@ -37,7 +40,7 @@ public class Tree {
         addRecursive(this.root.right, rightSet, this.root.points, this.root.level);
     }
 
-    public int minDifference(ArrayList<String> functions, Set<Integer> points) {
+    public int minDifference(ArrayList<String> functions, ArrayList<Integer> points) {
         int min = functions.size();
         int point = 0;
         int k;
@@ -111,14 +114,14 @@ public class Tree {
 
 class Node {
     ArrayList<String> value;
-    Set<Integer> points;
+    ArrayList<Integer> points;
     Integer level;
     Node left;
     Node right;
 
-    Node(ArrayList<String> value, Set<Integer> points, Integer level) {
+    Node(ArrayList<String> value, ArrayList<Integer> points, Integer level) {
         this.value = new ArrayList<String>(value);
-        this.points = new HashSet<Integer>(points);
+        this.points = new ArrayList<Integer>(points);
         this.level = level + 1;
         right = null;
         left = null;

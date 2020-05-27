@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Program {
     public static void main(String[] args) throws IOException {
-        File file = new File("defects.txt");
+        //File file = new File("defects.txt");
         //Scheme scheme = new Scheme();
         //scheme.generateDefects(file);
 
@@ -31,8 +31,9 @@ public class Program {
         while (bufferedReader.ready()) {
             functions.add(bufferedReader.readLine());
         }
-        Tree tree = new Tree(functions, new HashSet<Integer>());
+        Tree tree = new Tree(functions, new ArrayList<Integer>());
         tree.buildTree();
         System.out.println(tree.highLevel);
+        System.out.println(tree.test);
     }
 }
